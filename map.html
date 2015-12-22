@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<link rel="stylesheet" type="text/css" href="map.css"></link>
+	<link rel="stylesheet" type="text/css" href="searchPanel.css"></link>
+     <link rel="stylesheet" type="text/css" href="panel.css"></link>
+  </head>
+  <body>
+	<div id="floating-panel">
+      <!-- <input id="address" type="textbox" value="Sydney, NSW">
+      <input id="submit" type="button" value="Search"> -->
+	  <!-- <img src="images/mylocation.png" width="32px" height="32px" onclick="setMyLocation(this)" id="mylocation"/> -->
+	  <!-- <div id="controlPanelHolder" width="500px" height="100px"/> -->
+    </div>
+    <div id="map"></div>
+	
+	<script src="mapfunctions.js"></script>
+	<script src="searchPanel.js"></script>
+	<script src="panel.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAwZ3bWKzvOYc6O9hygMMwqtrFFPCfdqE&callback=initMap">
+    </script>
+	<script type="text/javascript">
+		var panel,geocoder;
+		// Listen for the event.
+		addEventListener('mapInit', function (e) {
+			setMyLocation();
+			console.log("Done with loading map");
+			geocoder = new google.maps.Geocoder();
+			/*document.getElementById('submit').addEventListener('click', function() {
+				geocodeAddress(geocoder, map);
+			});*/
+			document.getElementById("floating-panel").style.visibility="visible";
+		}, false);
+		function setMyLocation(){
+			console.log("In setMyLocation");
+			getUserLocation(function(pos){map.setCenter(pos);});
+		}
+		function addPanel(){
+			panel=new Panel(document.getElementById("floating-panel"), setMyLocation);
+		}
+		addPanel();
+	</script>
+  </body>
+</html>
