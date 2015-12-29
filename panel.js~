@@ -21,9 +21,6 @@ var Panel=function(root,setLocation){
 	var markers=this.createIcon("markers","images/markers32.png","Multiple locations");
 	this.markers=markers;this.panel.appendChild(this.markers);
 	this.root.appendChild(this.panel);
-
-	var multipleMarkersDialog=new MultipleMarkersDialog(document.body);
-	//searchPopup.searchPanel.addEventListener("mouseover",that.showSearch.bind(that));this.searchPopup=searchPopup;
 	
 	//document.body.appendChild(input);
 }

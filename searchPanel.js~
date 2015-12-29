@@ -30,7 +30,7 @@ SearchPanel.prototype.show=function(element){
 	input.style.opacity=1;
 	var transition="opacity 0s";
 	input.style.WebkitTransition=input.style.MozTransition=transition;
-	input.style.left=(element.getBoundingClientRect().right+10)+"px";
+	input.style.left=(element.getBoundingClientRect().right+5)+"px";
 	input.style.top=(element.getBoundingClientRect().top - 3)+"px";
 	input.style.visibility="visible";
 }

@@ -10,7 +10,7 @@ var event = new Event('mapInit');
 			style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 			position: google.maps.ControlPosition.TOP_RIGHT
 		  },
-          zoom: 10,
+          zoom: 20,
 		  zoomControl: true,
 		  streetViewControl: true,
 		  scaleControl: true

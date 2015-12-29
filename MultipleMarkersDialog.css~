@@ -1,0 +1,12 @@
+.multipleMarkersDialog{
+	background:rgba(255,255,255,.2);padding:1px;position: absolute;top:0;bottom: 0;left: 0;right: 0;margin:auto;z-index:100;
+}
+.urlLabel{
+	font-size:15px;
+}
+.url{
+	outline:0;font-size:15px;
+}
+.urlContainer{
+	padding:1px;background:rgba(255,255,255,.2);
+}

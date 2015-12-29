@@ -10,7 +10,7 @@
 }
 .searchInput{
 	padding:6px;padding-left:20px;border:none;background:rgba(255,255,255,.7);height:25px;
-	margin:1px;font-size:15px;width:300px;
+	margin:1px;font-size:15px;
 }
 .searchInput:focus{
 	outline:0;

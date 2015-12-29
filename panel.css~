@@ -9,10 +9,10 @@
 	padding:3px;margin:auto;opacity:.5
 }
 .icons:hover{
-	opacity:1;width:28px;height:28px;
+	opacity:1;width:32px;height:32px;
 }
 .icons-normal{
-	width:22px;height:22px;
+	width:25px;height:25px;
 }
 .icons-large{
 	width:32px;height:32px;

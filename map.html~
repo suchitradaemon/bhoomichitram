@@ -3,7 +3,6 @@
   <head>
 	<link rel="stylesheet" type="text/css" href="map.css"></link>
 	<link rel="stylesheet" type="text/css" href="searchPanel.css"></link>
-	<link rel="stylesheet" type="text/css" href="MultipleMarkersDialog.css"></link>
      <link rel="stylesheet" type="text/css" href="panel.css"></link>
   </head>
   <body>
