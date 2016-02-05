@@ -26,6 +26,9 @@
 .elementLabel{
 	padding-left:10px;
 }
+.exampleLabel{
+	padding-left:10px;background-color:#555;
+}
 .hide{display:none;}
 .treeElementHolder{padding:2px;display:inline-block;}
 .labelHolder{background:rgba(255,255,255,.7);padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;
@@ -34,3 +37,9 @@
 	border-radius:5px;
 }
 .labelHolder:hover{background:rgba(255,255,255,.9);color:#000000;box-shadow: 1px 1px 2px #999999;color:#333333;}
+.exampleHolder{background:rgba(120,120,120,.7);padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;
+	display:inline-block;margin-top:2px;box-shadow: 1px 1px 5px #cccccc;color:#333333;border-style: solid;
+	border-color:#ffffff;border-width:1px;
+	border-radius:5px;
+}
+.exampleHolder:hover{background:rgba(120,120,120,.9);color:#000000;box-shadow: 1px 1px 2px #999999;color:#333333;}

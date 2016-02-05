@@ -13,10 +13,13 @@ var MultipleMarkersDialog=function(root){
 	this.visibleContainer=visibleContainer;
 	
 	var urlLabel=document.createElement("label");urlLabel.id="urlLabel";urlLabel.className="urlLabel";
+	urlLabel.ondblclick=function(){event.stopPropagation();}
 	urlLabel.innerHTML="API url";this.urlLabel=urlLabel;
 
 	var url=document.createElement("input");url.type="textbox";url.id="url";url.className="url";
-	url.value="http://localhost/atomiton/airdata/devices.php";this.url=url;
+	url.ondblclick=function(){event.stopPropagation();}
+	//url.value="http://localhost/atomiton/airdata/devices.php";this.url=url;
+	url.value="http://localhost/atomiton/airdata/test.json";this.url=url;
 	var send=document.createElement("button");send.innerHTML="send";send.className="send";
 	send.onclick=this.callApi.bind(this);this.send=send;
 
@@ -32,6 +35,8 @@ var MultipleMarkersDialog=function(root){
 	this.root.appendChild(this.container);
 }
 MultipleMarkersDialog.prototype.callApi=function(){
+	var that=this;
+	this.send.disabled=true;
 	var url=this.url.value;
 	var apiResponse=this.apiResponse;
 	apiResponse.innerHTML="";
@@ -46,6 +51,7 @@ MultipleMarkersDialog.prototype.callApi=function(){
 		
 		httpRequest.onreadystatechange = function(){
 			if (httpRequest.readyState === XMLHttpRequest.DONE) {
+				that.send.disabled=false;
 			  if (httpRequest.status === 200) {
 				console.log(httpRequest.responseText);
 				if(IsJsonString(httpRequest.responseText)){

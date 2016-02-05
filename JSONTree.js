@@ -1,12 +1,60 @@
 var JSONTree=function(root,json){
-	this.ARRAY='array';this.OBJECT='object';this.LEAF='leaf';
+	this.ARRAY='array';this.OBJECT='object';this.LEAF='leaf';this.SAMPLE='sample';
 	this.root=root;
 	var container=document.createElement("div");this.container=container;
 	this.root.appendChild(container);
 	var obj=null;
 	if(IsJsonString(json)){obj=JSON.parse(json);}
 	else if('object'==typeof(json)){obj=json;}
-	if(obj){console.log("Creating tree");this.addElements(this,obj,this.container,"",5);}
+	
+	if(obj){
+		var sample={};
+		sample=this.createSample(this,obj,sample,"");console.log("Sample is ",sample);
+		console.log("Creating tree");this.addElements(this,obj,this.container,"",5);
+	}
+}
+
+
+JSONTree.prototype.createSample=function(context,ObjectRoot,sample,name){
+	console.log("Sample start",sample);
+	if( isArray(ObjectRoot) ) {
+		var map={};
+		var childType="";
+		if(ObjectRoot[0]){
+			console.log("Condition",('object'==typeof(ObjectRoot[0])||isArray(ObjectRoot[0])));
+			if(!('object'==typeof(ObjectRoot[0])||isArray(ObjectRoot[0]))){childType=typeof(ObjectRoot[0]);}
+		}
+		if(!sample[name]){sample[name]=[];}
+		var smpl=sample[name];
+		
+		console.log("ObjectRoot[0]",ObjectRoot[0],childType);
+		if(ObjectRoot[0]&&""==childType){
+			console.log("Looping through each element");
+			ObjectRoot.forEach(function(item){
+				for(var key in item){
+					if(!sample[name][key]){
+						sample[name][key]=item[key];
+					}else{
+						sample[name]=context.createSample(context,item[key],sample[name],key);
+					}
+					console.log(" Array item "+key+": "+typeof(item[key]),this,item[key],sample[name],key);
+				}	
+			});
+		}else{
+			console.log("In else");
+			sample[name]=sample[name].concat(ObjectRoot);
+		}
+		console.log("Map is ",map);
+	}else if('object'==typeof(ObjectRoot)){
+		if(!sample[name]){sample[name]={};}
+		for(var item in ObjectRoot){
+			sample[name]=context.createSample(context,ObjectRoot[item],sample[name],item);
+		}
+	}else{
+		sample[name]=ObjectRoot;
+	}
+	console.log("Sample end",sample);
+	return sample;
 }
 JSONTree.prototype.addElements=function(context,ObjectRoot, parent, name, level){
 	console.log("ObjectRoot ", ObjectRoot,"Parent",parent);
@@ -33,6 +81,9 @@ JSONTree.prototype.addElements=function(context,ObjectRoot, parent, name, level)
 					}
 				}	
 			});
+		}else{
+			console.log("In else");
+			element.getElementsByTagName("div")[0].appendChild(context.createElement(context,this.SAMPLE,null,level+1,ObjectRoot));
 		}
 		console.log("Map is ",map);
 	}else if('object'==typeof(ObjectRoot)){
@@ -74,6 +125,13 @@ JSONTree.prototype.createElement=function(context,type,name,level,value,datatype
 		element=document.createElement("div");element.style.paddingLeft=(level*2+2)+"px";
 		var labelHolder=document.createElement("div");labelHolder.className="labelHolder";
 		var label=document.createElement("label");label.innerHTML=name +" ("+datatype+") ";label.className="elementLabel";
+		labelHolder.appendChild(label);element.appendChild(labelHolder);element.title="example value: "+value;
+		break;
+		case this.SAMPLE:
+		element=document.createElement("div");element.style.paddingLeft=(level*2+2)+"px";
+		var labelHolder=document.createElement("div");labelHolder.className="exampleHolder";
+		var label=document.createElement("label");/*label.innerHTML=name +" ("+datatype+") ";*/label.className="elementLabel";
+		var innerHTML="";value.forEach(function(val){innerHTML+=((innerHTML?", ":"")+val);});label.innerHTML="e.g. "+innerHTML;
 		labelHolder.appendChild(label);element.appendChild(labelHolder);element.title="example value: "+value;
 		break;
 	}
